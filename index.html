@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DIAMOND </title>
+<link rel="icon" type="image/x-icon" href="ico/diamond.png">
+
+<style>
+/* BOOT ANIMATION */
+#boot {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: bootFadeOut 2.5s forwards;
+    animation-delay: 2s;
+}
+
+.boot-logo {
+    font-size: 120px;
+    font-weight: bold;
+    color: #09cbe5;
+    opacity: 0;
+    animation: bootLogo 2s ease-in-out forwards;
+}
+
+@keyframes bootLogo {
+    0% { opacity: 0; transform: scale(0.6); filter: blur(8px); }
+    40% { opacity: 1; transform: scale(1.05); filter: blur(0); }
+    70% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes bootFadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+   button {
+    color:white
+   }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: white;
+        text-align: center;
+    }
+
+    /* Modal background */
+    #modal {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 10;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    .options {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .option-btn {
+        padding: 15px 25px;
+        background: #222;
+        border: 2px solid #555;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 18px;
+    }
+
+    .option-btn:hover {
+        background: #05124c;
+        border-color: #09d6e5;
+    }
+
+    /* Banner styling */
+    .banner {
+        width: 250px;
+        height: 120px;
+        border-radius: 12px;
+        margin: 20px auto;
+        cursor: pointer;
+        background-size: cover;
+        background-position: center;
+        transition: 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Darken on hover */
+    .banner:hover {
+        filter: brightness(60%);
+    }
+
+    /* Text overlay */
+    .banner .label {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 10px 0;
+        background: rgba(0,0,0,0.6);
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        opacity: 0;
+        transition: 0.3s;
+    }
+
+    .banner:hover .label {
+        opacity: 1;
+    }
+
+    /* Hide all service groups by default */
+    .service-group {
+        display: none;
+        margin-top: 40px;
+    }
+
+    /* Change Genre Button */
+    #changeGenreBtn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 12px 18px;
+        background: #222;
+        border: 2px solid #555;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        color: white;
+        transition: 0.3s;
+        z-index: 5;
+    }
+
+    #changeGenreBtn:hover {
+        background: #050c4c;
+        border-color: #09cbe5;
+    }
+
+    
+</style>
+</head>
+<body>
+
+<div id="boot">
+    <div class="boot-logo">DIAMOND</div>
+</div>
+
+
+<button id="changeGenreBtn" onclick="openGenreSelector()">Back</button>
+
+<!-- GENRE SELECTOR POPUP -->
+<div id="modal">
+    <h2>What do you want to do?</h2>
+    <div class="options">
+        <div class="option-btn" onclick="selectGenre('piracy')" title="AyAy Pirate"><img src="ico/piracy.gif" width="30px" height="auto"> Piracy</div>
+        <div class="option-btn" onclick="selectGenre('stream')" title="No Netflix, No Problem"><img src="ico/stream.ico" width="30px" height="auto"> Stream</div>
+        <div class="option-btn" onclick="selectGenre('sport')" title="I rather watch sport"><img src="ico/sports.png" width="30px" height="auto"> Sport</div>
+        <div class="option-btn" onclick="selectGenre('software')"><img src="ico/software.gif" width="30px" height="auto"> Software</div>
+        <div class="option-btn" onclick="selectGenre('books')"><img src="ico/book.png" width="30px" height="auto"> Books</div>
+        <div class="option-btn" onclick="selectGenre('music')"><img src="ico/music.gif" width="30px" height="auto"> Music</div>
+        <div class="option-btn" onclick="selectGenre('anime')"><img src="ico/anime.png" width="30px" height="auto"> Anime</div>
+        <p></p>
+        <a href="index.html">
+</a>
+
+    </div>
+</div>
+
+<h1 id="chosenGenre"></h1>
+
+<!-- PIRACY SERVICES -->
+<div id="services-piracy" class="service-group">
+    <h2>AyAy Pirate lets go on an adventure!!</h2>
+
+    <a href="https://thepiratebay.org/" target="_blank" title="A Sweden Classic">
+        <div class="banner" style="background-image:url('banner/tpb.png'); background-color:#090de5;">
+            <div class="label">The Pirate Bay</div>
+        </div>
+    </a>
+
+    <a href="https://1337x.to/home/" target="_blank" title="Leet">
+        <div class="banner" style="background-image:url('banner/1337X.png'); background-color:#090de5;">
+            <div class="label">1337x</div>
+        </div>
+    </a>
+
+    <a href="https://ankergames.net/" target="_blank" title="Illegal Gamer">
+        <div class="banner" style="background-image:url('banner/ankergames.png'); background-color:#090de5;">
+            <div class="label">AnkerGames</div>
+        </div>
+    </a>
+
+
+    <a href="https://fitgirl-repacks.site/" target="_blank" title="Woman on the JOB!">
+        <div class="banner" style="background-image:url('banner/fitgirl.png'); background-color:#090de5;">
+            <div class="label">FitGirl Repacks</div>
+        </div>
+    </a>
+
+    <a href="https://ext.to/" target="_blank" title="Any ideas for title?">
+        <div class="banner" style="background-image:url('banner/exxt.png'); background-color:#090de5;">
+            <div class="label">Ext</div>
+        </div>
+    </a>
+
+    <a href="https://gog-games.to/" target="_blank" title="Are you sure you want more games?">
+        <div class="banner" style="background-image:url('banner/gog.png'); background-color:#090de5;">
+            <div class="label">GOG Games</div>
+        </div>
+    </a>
+
+    <a href="https://igg-games.com/" target="_blank" title="Are you adicted to games?">
+        <div class="banner" style="background-image:url('banner/igg.png'); background-color:#090de5;">
+            <div class="label">IGGames</div>
+        </div>
+    </a>
+
+    <a href="https://m4ckd0ge-repacks.site/index.html" target="_blank" title="Did you consider watching a movie instead?">
+        <div class="banner" style="background-image:url('banner/m4ckd0ge.png'); background-color:#090de5;">
+            <div class="label">M4CKD0GE Repacks</div>
+        </div>
+    </a>
+
+
+        <a href="https://nyaa.si/" target="_blank" title="Waifu's paradise">
+        <div class="banner" style="background-image:url('banner/nyaa.si.png'); background-color:#090de5;">
+            <div class="label">Nyaa.si (ANIME)</div>
+        </div>
+    </a>
+
+        <a href="https://eztvx.to/home" target="_blank" title="Easy">
+        <div class="banner" style="background-image:url('banner/eztv.png'); background-color:#090de5;">
+            <div class="label">EZTV</div>
+        </div>
+    </a>
+
+        <a href="https://steamgg.net/" target="_blank" title="Imagine Steam but free.">
+        <div class="banner" style="background-image:url('banner/steamgg.png'); background-color:#090de5;">
+            <div class="label">SteamGG</div>
+        </div>
+    </a>
+
+        <a href="https://www.torrenting.com" target="_blank" title="Straight to the point!">
+        <div class="banner" style="background-image:url('banner/torrenting.png'); background-color:#090de5;">
+            <div class="label">Torrenting</div>
+        </div>
+    </a>
+
+
+        <a href="https://steamrip.com/" target="_blank" title="Steam but ripped?">
+        <div class="banner" style="background-image:url('banner/steamrip.png'); background-color:#090de5;">
+            <div class="label">SteamRIP</div>
+        </div>
+    </a>
+
+        <a href="https://rarbg.to/" target="_blank" title="Anything!">
+        <div class="banner" style="background-image:url('banner/rarbg.png'); background-color:#090de5;">
+            <div class="label">RarBG</div>
+        </div>
+    </a>
+
+        <a href="https://elamigos.site/" target="_blank" title="Your Friend!">
+        <div class="banner" style="background-image:url('banner/elamigo.png'); background-color:#090de5;">
+            <div class="label">ELAmigos</div>
+        </div>
+    </a>
+
+        <a href="https://online-fix.me/" target="_blank" title="IDK how it works...">
+        <div class="banner" style="background-image:url('banner/onlinefi.png'); background-color:#090de5;">
+            <div class="label">OnlineFIX</div>
+        </div>
+    </a>
+
+        <a href="https://www7.yts-official.to/" target="_blank" title="A hollywood classic!">
+        <div class="banner" style="background-image:url('banner/yts.png'); background-color:#090de5;">
+            <div class="label">YTS</div>
+        </div>
+    </a>
+  
+        <a href="https://rutor.info/" target="_blank" title="I didn`t know you speak Russian?">
+        <div class="banner" style="background-image:url('banner/rutor.png'); background-color:#090de5;">
+            <div class="label">RuTor</div>
+        </div>
+    </a>    
+
+        <a href="https://www.torrentdownloads.pro/" target="_blank" title="Any torrent you can think of!">
+        <div class="banner" style="background-image:url('banner/torrentdownloads.png'); background-color:#090de5;">
+            <div class="label">TorrentDownloads</div>
+        </div>
+    </a>   
+     
+
+        <a href="https://www.limetorrents.fun/home" target="_blank" title="Lime and Corona Extra!!! IM DRUNK!">
+        <div class="banner" style="background-image:url('banner/limetorrents.jpg'); background-color:#090de5;">
+            <div class="label">LimeTorrents</div>
+        </div>
+    </a>   
+
+
+    </a>
+
+</div>
+
+<!-- STREAM SERVICES -->
+<div id="services-stream" class="service-group">
+    <h2>NO NETFLIX, NO PROBLEM. And you ain`t poor.</h2>
+
+    <a href="https://flixer.su/" target="_blank" title="Better than Netflix!">
+        <div class="banner" style="background-image:url('banner/flixer.png'); background-color:#ff0000;">
+            <div class="label">Flixer</div>
+        </div>
+    </a>
+
+    <a href="https://www.cineby.sc/" target="_blank" title="Cinema from HOME!">
+        <div class="banner" style="background-image:url('banner/cineby.png'); background-color:#ff0000;">
+            <div class="label">CineBY</div>
+        </div>
+    </a>
+
+    <a href="https://xprime.stream/" target="_blank" title="Santa actually comes here!">
+        <div class="banner" style="background-image:url('banner/xprime.png'); background-color:#ff0000;">
+            <div class="label">Xprime</div>
+        </div>
+    </a>
+    
+    <a href="https://www.bitcine.net/" target="_blank" title="Movie night BESTIE!">
+        <div class="banner" style="background-image:url('banner/bitcine.png'); background-color:#ff0000;">
+            <div class="label">Bitcine</div>
+        </div>
+    </a>    
+
+    <a href="https://cinegram.net/home" target="_blank" title="Instagram, I think not!">
+        <div class="banner" style="background-image:url('banner/cinegram.png'); background-color:#ff0000;">
+            <div class="label">Cinegram</div>
+        </div>
+    </a>  
+
+    <a href="https://docplus.com/home" target="_blank" title="Documentary parking only!">
+        <div class="banner" style="background-image:url('banner/documentary+.png'); background-color:#ff0000;">
+            <div class="label">Documentary+</div>
+        </div>
+    </a>  
+
+    <a href="https://rivestream.org/" target="_blank" title="All in one">
+        <div class="banner" style="background-image:url('banner/rive.png'); background-color:#ff0000;">
+            <div class="label">Rive Stream</div>
+        </div>
+    </a>  
+
+
+
+
+</div>
+
+<!-- SPORT SERVICES -->
+<div id="services-sport" class="service-group">
+    <h2>Watching sport is better than playing sport</h2>
+
+    <a href="https://sportyhunter.net/" target="_blank" title="Sports">
+        <div class="banner" style="background-image:url('banner/sportyhunter.png'); background-color:#8b0000;">
+            <div class="label">SportyHunter</div>
+        </div>
+    </a>
+
+    <a href="https://istreameast.is/" target="_blank" title="I`m becoming fit">
+        <div class="banner" style="background-image:url('banner/streameast.png'); background-color:#5a2dff;">
+            <div class="label">StreamEAST</div>
+        </div>
+    </a>
+
+    <a href="https://watchsports.to/" target="_blank" title="I have SIXPACK">
+        <div class="banner" style="background-image:url('banner/watchsports.png'); background-color:#e50914;">
+            <div class="label">WatchSports</div>
+        </div>
+    </a>
+
+    <a href="https://rivestream.org/livesports" target="_blank" title="My muscles hurt!">
+        <div class="banner" style="background-image:url('banner/rivesports.png'); background-color:#e50914;">
+            <div class="label">Rive - Sports</div>
+        </div>
+    </a>
+
+    <a href="https://www.livehdtv.com/" target="_blank" title="I rather watch sports!">
+        <div class="banner" style="background-image:url('banner/livehdtv.png'); background-color:#e50914;">
+            <div class="label">Live HDTV</div>
+        </div>
+    </a>
+
+
+</div>
+
+<!-- SOFTWARE SERVICES -->
+<div id="services-software" class="service-group">
+    <h2>What should i say?</h2>
+
+    <a href="https://aedownload.com/" target="_blank" title="Its great">
+        <div class="banner" style="background-image:url('banner/aedl.png'); background-color:#113ccf;">
+            <div class="label">AE Download</div>
+        </div>
+    </a>
+
+    <a href="https://audioz.download/" target="_blank" title="MUSIC STUFF">
+        <div class="banner" style="background-image:url('banner/audiodz.png'); background-color:#113ccf;">
+            <div class="label">AudioZ</div>
+        </div>
+    </a>
+
+    <a href="https://appdoze.net/" target="_blank" title="Aplications">
+        <div class="banner" style="background-image:url('banner/appdoze.png'); background-color:#113ccf;">
+            <div class="label">APPDoze</div>
+        </div>
+    </a>    
+
+    <a href="https://diakov.net/" target="_blank" title="Russian site!">
+        <div class="banner" style="background-image:url('banner/diakovnet.png'); background-color:#113ccf;">
+            <div class="label">Diakov.net</div>
+        </div>
+    </a>
+
+    <a href="https://www.downloadpirate.com/" target="_blank" title="EVERYTHING YOU CAN IMAGINE">
+        <div class="banner" style="background-image:url('banner/downloadpirate.png'); background-color:#113ccf;">
+            <div class="label">DownloadPirate</div>
+        </div>
+    </a>
+
+    <a href="https://scloud.ws/" target="_blank" title="Software I Guess">
+        <div class="banner" style="background-image:url('banner/scloudws.png'); background-color:#113ccf;">
+            <div class="label">SCloudWS</div>
+        </div>
+    </a>
+
+    </div>
+<!-- BOOKS SERVICES -->
+<div id="services-books" class="service-group">
+    <h2>Music is the Key!</h2>
+
+    <a href="https://rivestream.org/manga" target="_blank">
+        <div class="banner" style="background-image:url('banner/rivebooks.png'); background-color:#0e0e0e;">
+            <div class="label">Rive - Manga</div>
+        </div>
+    </a>
+
+    <a href="https://libgen.li/index.php" target="_blank">
+        <div class="banner" style="background-image:url('banner/libgen.png'); background-color:#0e0e0e;">
+            <div class="label">LibGen</div>
+        </div>
+    </a>
+
+    <a href="https://liber3.eth.limo/#/?" target="_blank">
+        <div class="banner" style="background-image:url('banner/liber3.jpg'); background-color:#0e0e0e;">
+            <div class="label">Liber3</div>
+        </div>
+    </a>
+
+
+</div>
+
+
+<!-- MUSIC SERVICES -->
+<div id="services-music" class="service-group">
+    <h2>Music is the key!</h2>
+
+    <a href="https://shailen.dedyn.io/racoon/" target="_blank">
+        <div class="banner" style="background-image:url('banner/racoon.png'); background-color:#0e0e0e;">
+            <div class="label">Racoon (DOWNLOADER)</div>
+        </div>
+    </a>
+
+    <a href="https://ezmp3.net/en/" target="_blank">
+        <div class="banner" style="background-image:url('banner/ezmp3.png'); background-color:#0e0e0e;">
+            <div class="label">EZMP3.net</div>
+        </div>
+    </a>
+
+    <a href="https://cobalt.tools/" target="_blank">
+        <div class="banner" style="background-image:url('banner/cobalt.png'); background-color:#0e0e0e;">
+            <div class="label">Cobalt</div>
+        </div>
+    </a>
+
+    <a href="https://doubledouble.top/" target="_blank">
+        <div class="banner" style="background-image:url('banner/doubledouble.png'); background-color:#0e0e0e;">
+            <div class="label">DoubleDouble</div>
+        </div>
+    </a>
+
+    <a href="https://downloadmusicschool.com/bandcamp/" target="_blank">
+        <div class="banner" style="background-image:url('banner/bandicamp.png'); background-color:#0e0e0e;">
+            <div class="label">Bandicamp</div>
+        </div>
+    </a>
+
+    <a href="https://cnvmp3.com/v54" target="_blank">
+        <div class="banner" style="background-image:url('banner/cnvmp3.png'); background-color:#0e0e0e;">
+            <div class="label">CNV.mp3</div>
+        </div>
+    </a>    
+
+    <a href="https://fetchpik.com/epidemicsound-downloader.php" target="_blank">
+        <div class="banner" style="background-image:url('banner/fetchpik.png'); background-color:#0e0e0e;">
+            <div class="label">Fetchpik</div>
+        </div>
+    </a>  
+
+    <a href="https://ncs.io/" target="_blank">
+        <div class="banner" style="background-image:url('banner/ncs.png'); background-color:#0e0e0e;">
+            <div class="label">NCS Music</div>
+        </div>
+    </a>  
+
+    <a href="https://lucida.to/" target="_blank">
+        <div class="banner" style="background-image:url('banner/lucida.png'); background-color:#0e0e0e;">
+            <div class="label">Lucida</div>
+        </div>
+    </a>  
+
+
+
+</div>
+
+
+
+
+<!-- ANIME SERVICES -->
+<div id="services-anime" class="service-group">
+    <h2>Anime?</h2>
+
+    <a href="https://animenosub.to/" target="_blank">
+        <div class="banner" style="background-image:url('banner/animenosub.png'); background-color:#0e0e0e;">
+            <div class="label">Anime No Sub</div>
+        </div>
+    </a>
+
+    <a href="https://rivestream.org/anime" target="_blank">
+        <div class="banner" style="background-image:url('banner/riveanime.png'); background-color:#0e0e0e;">
+            <div class="label">Rive - Anime</div>
+        </div>
+    </a>
+
+    <a href="https://anikai.to/" target="_blank">
+        <div class="banner" style="background-image:url('banner/animekai.png'); background-color:#0e0e0e;">
+            <div class="label">AnimeKAI</div>
+        </div>
+    </a>
+
+</div>
+
+
+
+
+<script>
+function selectGenre(genre) {
+    document.getElementById("modal").style.display = "none";
+
+    document.querySelectorAll('.service-group').forEach(g => g.style.display = "none");
+
+    document.getElementById("services-" + genre).style.display = "block";
+
+    document.getElementById("chosenGenre").innerText =
+        "You picked: " + genre.charAt(0).toUpperCase() + genre.slice(1);
+}
+
+function openGenreSelector() {
+    document.getElementById("modal").style.display = "flex";
+}
+</script>
+
+<script>
+window.onload = function() {
+    setTimeout(() => {
+        document.getElementById("boot").style.display = "none";
+    }, 3500); // 3.5 seconds total
+};
+</script>
+
+
+</body>
+
+</html>
